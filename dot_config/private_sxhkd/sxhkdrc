@@ -1,0 +1,112 @@
+
+shift + F6
+    xdotool search --class mpv key space
+
+super + Return
+    $TERMINAL
+
+super + F1
+    $TERMINAL
+
+super + d
+    rofi -modi drun,run,window -show-icons -show drun -theme theme.rasi
+
+super + F2
+    notify-send "Starting '$BROWSER'" -t 3000 \
+	&& $BROWSER
+
+super + shift + F2
+    notify-send "Starting '$BROWSER' in private mode" -t 3000 \
+	&& priv "$BROWSER"
+
+# Starts file manager at ~
+super + F3
+    notify-send "Starting '$FILE_MANAGER'" -t 3000 \
+	&& "$FILE_MANAGER"
+
+# Starts file manager at ~ as sudo
+super + shift + F3
+    gksu xdg-open ~ || kdsu xdg-open ~
+
+Print
+    flameshot gui
+
+shift + Print
+    "$SCRIPTS/screenshot"
+
+super + p
+    notify-send "Restarted polybar and sxhkd" -t 3000 \
+	&& polybar-msg cmd restart \
+	&& kill -USR1 sxhkd
+
+super + shift + p
+    "$XDG_CONFIG_HOME/polybar/scripts/color-switch.sh"
+
+super + shift + b
+    "$SCRIPTS/set-bg"
+
+super + u
+    $SCRIPTS/usbeast -m
+
+super + shift + u
+    $SCRIPTS/usbeast -u
+
+super + e
+    $SCRIPTS/pick-emoji
+
+super + m; {l, u, e, p, h, r, s}
+    { \
+        i3lock-fancy && sleep 1 && xset -display :0.0 dpms force off, \
+        dm-tool switch-to-greeter, \
+        i3-msg exit, \
+        systemctl suspend, \
+        systemctl hybernate, \
+        systemctl reboot, \
+        systemctl poweroff \
+    }
+
+XF86TouchpadToggle
+    toggle-touchpad --notify
+
+shift + XF86TouchpadToggle
+    xset -display :0.0 dpms force {off,on}
+
+XF86Audio{Play,Next,Prev}
+    mpc {toggle,next,prev}
+
+shift + XF86Audio{Play,Next,Prev}
+    wcc {toggle_cycle,next,prev}
+
+shift + XF86Audio{Raise,Lower}Volume
+    mpc seek {+,-}00:00:05
+
+XF86Audio{Raise,Lower}Volume
+    pactl set-sink-volume @DEFAULT_SINK@ {+,-}5%
+
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+shift + XF86AudioMute
+    pkill -USR1 redshift
+
+XF86MonBrightness{Up,Down}
+    brightnessctl set 5%{+,-}
+
+shift + XF86MonBrightness{Up,Down}
+    brightnessctl set {100,0}%
+
+super + s
+    "$SCRIPTS/chaudio" --set-default-sink
+
+super + shift + s
+    "$SCRIPTS/chaudio"
+
+super + n; {a, q, shift + q, h, shift + h, c, t}
+    dunstctl {action, close, close-all, history-pop, history-clear, context, set-paused toggle}
+
+super + w
+    passmenu | xargs -r notify-send -t 3000 "Password Copied"
+
+super + shift + w
+    networkmanager_dmenu
+

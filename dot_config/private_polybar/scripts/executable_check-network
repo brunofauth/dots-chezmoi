@@ -1,0 +1,38 @@
+#! /bin/sh
+
+
+disconnected=""
+wireless_connected=""
+ethernet_connected=""
+
+HOSTS="" 
+HOSTS="$HOSTS sourceforge.net"
+HOSTS="$HOSTS archlinux.org"
+HOSTS="$HOSTS google.com"
+HOSTS="$HOSTS bitbucket.org"
+HOSTS="$HOSTS github.com"
+
+
+is_online() {
+    for host in $HOSTS; do
+        wget -q --spider "$host" \
+            && return 0
+    done
+    return 1;
+}
+
+
+while true; do
+    if is_online; then
+        case "$(ip link | awk '/state UP/ {print $2}')" in
+            e*) echo "$ethernet_connected" ;;
+            w*) echo "$wireless_connected" ;;
+            *) echo "UNKOWN-NETWORK-INTERFACE"
+        esac
+        sleep 25
+    else
+        echo "$disconnected"
+        sleep 0.5
+    fi
+done
+

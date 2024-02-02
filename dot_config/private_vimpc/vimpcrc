@@ -1,0 +1,6 @@
+set autolyrics
+set ignorecase
+set window browse
+
+map gb :browse<Enter>
+map gh :help<Enter>

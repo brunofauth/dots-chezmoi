@@ -1,0 +1,10 @@
+#! /bin/sh
+
+
+ENTRIES=" Lock| Logout| Reboot| Shutdown| echo"
+case "$(echo "$ENTRIES" | rofi -dmenu -i -p 'System' -sep '|')" in
+    *Lock) i3lock-fancy ;;
+    *Logout) openbox --exit;;
+    *Reboot) systemctl reboot ;;
+    *Shutdown) systemctl -i poweroff;;
+esac

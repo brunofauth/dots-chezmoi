@@ -1,0 +1,90 @@
+#! /usr/bin/env sh
+
+
+ICO_ERR="/usr/share/icons/Papirus/32x32/categories/script-error.svg"
+ICO_YES="/usr/share/icons/Papirus/32x32/categories/gnome-info.svg"
+
+
+query_destination() {
+    zenity \
+        --title="Move picture" \
+        --entry \
+        --text="Type where to move this picture to:" \
+        --entry-text="$1"
+}
+
+
+success() {
+    notify-send -a sxiv.desktop -t 2000 -i "$ICO_YES" -u normal "$1"
+}
+
+
+error() {
+    notify-send -a sxiv.desktop -t 2000 -i "$ICO_ERR" -u critical "$1"
+}
+
+
+cmd_feedback() {
+    { [ "$?" -eq 0 ] && success "$1"; } || error "$2"
+}
+
+
+while read file; do
+    case "$1" in
+        c)
+            <"$file" xclip -t "$(file -b --mime-type "$file")" -selection clipboard
+            cmd_feedback \
+                "Copied the contents of '$file' into the clipboard" \
+                "Couldn't copy the contents of '$file' into the clipboard"
+            ;;
+        d)
+            mv "$file" ~/.recycle-bin
+            cmd_feedback \
+                "Moved '$file' into the recycle bin ('~/.recycle-bin')" \
+                "Couldn't move '$file' into the recycle bin ('~/.recycle-bin')"
+            ;;
+        n)
+            printf "%s" "$file" | xclip -selection clipboard
+            cmd_feedback \
+                "Copied the filename '$file' into the clipboard" \
+                "Couldn't copy the filename '$file' into the clipboard"
+            ;;
+        m)
+            destination="$(query_destination "$file")"
+
+            [ -f "$destination" ] \
+                && error "Failed to move file: destination '$destination' alredy exists." \
+                && exit 1
+
+            mv -n "$file" "$destination"
+            cmd_feedback \
+                "Moved file successfully '$file' -> '$destination'" \
+                "Failed moving file '$file' -> '$destination'"
+            ;;
+        M)
+            destination="$(query_destination "$file")"
+            mv -f "$file" "$destination"
+            cmd_feedback \
+                "Moved file successfully '$file' -> '$destination'" \
+                "Failed moving file '$file' -> '$destination'"
+            ;;
+        r)
+            mogrify -rotate 90 "$file"
+            cmd_feedback \
+                "Rotated '$file' 90 degrees." \
+                "Failed rotating '$file'"
+            ;;
+        R)
+            mogrify -rotate -90 "$file"
+            cmd_feedback \
+                "Rotated '$file' -90 degrees." \
+                "Failed rotating '$file'"
+            ;;
+        w)
+            xwallpaper --zoom "$file"
+            cmd_feedback \
+                "Set desktop wallpaper to '$1'" \
+                "Failed setting desktop wallpaper to '$1'"
+            ;;
+    esac
+done
