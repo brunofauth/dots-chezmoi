@@ -41,6 +41,7 @@ export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RYE_HOME="$XDG_CACHE_HOME/rye"
 export TEXMFVAR="$XDG_DATA_HOME/texlive"
 export CUPS_DATADIR="$XDG_DATA_HOME/cups"
 export CUPS_CACHEDIR="$XDG_CACHE_DIR/cups"
@@ -74,6 +75,7 @@ export TERMINAL=kitty
 export BROWSER=firefox
 export BROWSER_PRIVATE="firefox --private"
 export FILE_MANAGER="pcmanfm"
+export IDF_TOOLS_PATH="$XDG_CACHE_HOME/esp-idf"
 
 
 
@@ -101,4 +103,12 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools"
 export PIP_REQUIRE_VIRTUALENV=true
 export FZF_DEFAULT_OPTS="--reverse -e -i"
 export WINEDLLOVERRIDES="mscoree=d;mshtml=d"
+
+
+
+# espup (https://esp-rs.github.io/book/installation/riscv-and-xtensa.html)
+
+rustup_toolchains="/home/bruno/.rustup/toolchains"
+export LIBCLANG_PATH="$rustup_toolchains/esp/xtensa-esp32-elf-clang/esp-16.0.4-20231113/esp-clang/lib"
+export PATH="$rustup_toolchains/esp/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin:$PATH"
 

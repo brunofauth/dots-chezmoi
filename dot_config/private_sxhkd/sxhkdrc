@@ -108,5 +108,6 @@ super + w
     passmenu | xargs -r notify-send -t 3000 "Password Copied"
 
 super + shift + w
-    networkmanager_dmenu
+    as-dialogue --work-dir $HOME/proj/wifi-menu poetry run wmenu
+    # networkmanager_dmenu
 

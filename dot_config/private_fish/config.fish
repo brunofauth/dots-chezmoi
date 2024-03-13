@@ -19,6 +19,7 @@ if status --is-interactive
     zoxide init fish | source
     ferium complete fish | source
     register-python-argcomplete --shell fish pipx | source
+    rye self completion --shell fish | source
 end
 
 
