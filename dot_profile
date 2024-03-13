@@ -40,6 +40,7 @@ export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 # export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export VIMINIT=":source $XDG_CONFIG_HOME"/vim/vimrc
+export MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RYE_HOME="$XDG_CACHE_HOME/rye"
 export TEXMFVAR="$XDG_DATA_HOME/texlive"
