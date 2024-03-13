@@ -58,5 +58,7 @@ nnoremap <Plug>(fzf-prefix)h  <Cmd>FzfHelptags<CR>
 nnoremap <Plug>(fzf-prefix)Hf <Cmd>FzfHistory<CR>
 nnoremap <Plug>(fzf-prefix)Hc <Cmd>FzfHistory:<CR>
 nnoremap <Plug>(fzf-prefix)Hs <Cmd>FzfHistory/<CR>
+
+nnoremap <A-Tab> <Cmd>FzfSnippets<CR>
 inoremap <A-Tab> <Cmd>FzfSnippets<CR>
 

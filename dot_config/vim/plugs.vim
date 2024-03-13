@@ -120,6 +120,7 @@ Plug 'https://github.com/brunofauth/vim-inflect-abbr'
 
 " the ultimate solution for snippets in Vim. It has many features, speed being one of them.
 Plug 'https://github.com/SirVer/ultisnips'
+runtime cfgs/ultisnips.vim
 
 call plug#end()
 
