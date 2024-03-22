@@ -114,9 +114,12 @@ runtime cfgs/replica.vim
 
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/glts/vim-textobj-comment'
+Plug 'https://github.com/preservim/vim-textobj-sentence'
+runtime cfgs/vim-textobj-sentence.vim
 
 " Autogenerate abbreviations for many variations of a word, according its inflections 
 Plug 'https://github.com/brunofauth/vim-inflect-abbr'
+runtime cfgs/inflect-abbr.vim
 
 " the ultimate solution for snippets in Vim. It has many features, speed being one of them.
 Plug 'https://github.com/SirVer/ultisnips'
